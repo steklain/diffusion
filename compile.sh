@@ -2,7 +2,7 @@
 # your installation path, where the includes are. It is usually
 # something like: /path/to/geant4-install/include/Geant4
 
-g++ -o tutorial\
+g++ -o diffusion\
     main.cpp \
     source/MyDetector.cpp \
     source/MyPrimaryGenerator.cpp \
