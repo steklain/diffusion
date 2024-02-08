@@ -72,10 +72,12 @@ int main(int argc, char** argv){
     runManager->SetUserAction( new MyEventAction() );
     runManager->Initialize();
 
+    
     auto *visManager = new G4VisExecutive();
     visManager->Initialise();
 
 	auto *uiExecutive = new G4UIExecutive(argc,argv,"Qt");
+    //auto *uiExecutive = new G4UIExecutive(argc,argv,"csh");
 
 
 	if (argc == 1){
@@ -83,7 +85,7 @@ int main(int argc, char** argv){
 	} else {
 		auto *uiManager = G4UImanager::GetUIpointer();
 		uiManager->ApplyCommand("/control/execute " + G4String(argv[1]) );
-        uiExecutive->SessionStart();
+        //uiExecutive->SessionStart();
 	}
 
     //const G4double timeStep = 1.0 * CLHEP::ns;  // Time step for time-lapse simulation
