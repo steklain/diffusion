@@ -44,12 +44,12 @@ G4VPhysicalVolume* MyDetector::Construct(){
 
     double lArScintilation[N_DATA] = {534, 4582};
     
-    lArPropertiesTable->AddProperty("SCINTILLATION", photonEnergies, lArScintilation, N_DATA,true);
+    //lArPropertiesTable->AddProperty("SCINTILLATION", photonEnergies, lArScintilation, N_DATA,true);
 	
     lArPropertiesTable->AddConstProperty("SCINTILLATIONYIELD", 240 / MeV);
 	lArPropertiesTable->AddConstProperty("RESOLUTIONSCALE", 1.0);
-	lArPropertiesTable->AddConstProperty("FASTTIMECONSTANT", 6.2 * ns,true);
-    lArPropertiesTable->AddConstProperty("SLOWTIMECONSTANT", 1590 * ns,true);
+	//lArPropertiesTable->AddConstProperty("FASTTIMECONSTANT", 6.2 * ns,true);
+    //lArPropertiesTable->AddConstProperty("SLOWTIMECONSTANT", 1590 * ns,true);
 
     auto glass = G4NistManager::Instance()->FindOrBuildMaterial("G4_GLASS_PLATE");
     auto glassPropertiesTable = new G4MaterialPropertiesTable();
@@ -62,7 +62,8 @@ G4VPhysicalVolume* MyDetector::Construct(){
     glassPropertiesTable->AddProperty("ABSLENGTH", photonEnergies, glassAbsLength, N_DATA);
 
     // World volume
-    auto worldBox = new G4Box("worldBox", 14*m, 3.65*m, 12*m); 
+    double xw = 1400*cm, yw = 365*cm, zw = 1200*cm;
+    auto worldBox = new G4Box("worldBox", 0.5*xw, 0.5*yw, 0.5*zw); 
     auto logicalWorld = new G4LogicalVolume(worldBox, lAr, "LogicalWorld");
     auto physicalWorld = new G4PVPlacement(0, {0,0,0}, logicalWorld, "World", 0, false, 0);
     logicalWorld->SetVisAttributes( new G4VisAttributes( G4Colour::Green() ) );
@@ -79,10 +80,10 @@ G4VPhysicalVolume* MyDetector::Construct(){
 
     double sensorDim = 9.3*cm;
     double sensorThickness = 1*mm;
-    double sensorDistance = 1.8*m/2 - 2*sensorThickness;
-    auto boxSensor = new G4Box("SensorBox", sensorDim/2, sensorThickness/2, sensorDim/2); 
+    double sensorDistance = 0.5*zw - 2*sensorThickness;
+    auto boxSensor = new G4Box("SensorBox", sensorDim/2, sensorDim/2, sensorThickness/2); 
     auto logSensor = new G4LogicalVolume(boxSensor, silicon, "LogicalSensor");
-    auto phySensor = new G4PVPlacement(0, {0,sensorDistance,0}, logSensor, "World/Sensor", logicalWorld, false, 0);
+    auto phySensor = new G4PVPlacement(0, {0,0,sensorDistance}, logSensor, "World/Sensor", logicalWorld, false, 0);
     logSensor->SetVisAttributes( new G4VisAttributes( G4Color::Red() ) );
 
     logSensor->SetSensitiveDetector( new MySensorDetector("PhotonCounter") );

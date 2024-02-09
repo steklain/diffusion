@@ -24,7 +24,8 @@ void MyHit::Print(){
 
     std::ofstream outFile("output.dat", std::ios::app);
     //outFile << "Energy Deposit: " << m_EnDep / CLHEP::MeV << " MeV" << G4endl;
-    outFile << "Time of Arrival: " << m_Time / CLHEP::ns << " ns" << G4endl;
+    //outFile << "Time of Arrival: " << m_Time / CLHEP::ns << " ns" << G4endl;
+    outFile << m_Time / CLHEP::ns << G4endl;
     outFile.close();
     
 }
