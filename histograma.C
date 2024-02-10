@@ -26,14 +26,16 @@ void histograma() {
     inputFile.close();
 
     // Determine the number of bins based on the range and data distribution
-    int numBins = static_cast<int>((maxValue - minValue) / 0.0005); // Adjust the bin width as needed
+    int numBins = static_cast<int>((maxValue - minValue) / 1); // Adjust the bin width as needed
 
     // Create a ROOT histogram
-    TH1F *histogram = new TH1F("histogram", "Number of photons arriving at the detector;Time (ns);", numBins, minValue-0.001, maxValue);
+    //TH1F *histogram = new TH1F("histogram", "Number of photons arriving at the detector;Time (ns);", numBins, minValue-0.01, maxValue);
+    TH1F *histogram = new TH1F("histogram", "Number of photons arriving at the detector;Time (ns);", 250, 3.5, 25);
 
     // Reopen the file and fill the histogram
     inputFile.open("output.dat");
     while (inputFile >> value) {
+        value=value*10;
         histogram->Fill(value);
     }
 

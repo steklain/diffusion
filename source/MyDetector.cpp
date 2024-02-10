@@ -44,12 +44,15 @@ G4VPhysicalVolume* MyDetector::Construct(){
 
     double lArScintilation[N_DATA] = {534, 4582};
     
-    //lArPropertiesTable->AddProperty("SCINTILLATION", photonEnergies, lArScintilation, N_DATA,true);
+    lArPropertiesTable->AddProperty("SCINTILLATION", photonEnergies, lArScintilation, N_DATA,true);
 	
     lArPropertiesTable->AddConstProperty("SCINTILLATIONYIELD", 240 / MeV);
 	lArPropertiesTable->AddConstProperty("RESOLUTIONSCALE", 1.0);
-	//lArPropertiesTable->AddConstProperty("FASTTIMECONSTANT", 6.2 * ns,true);
-    //lArPropertiesTable->AddConstProperty("SLOWTIMECONSTANT", 1590 * ns,true);
+	lArPropertiesTable->AddConstProperty("FASTTIMECONSTANT", 6.2 * ns,true);
+    lArPropertiesTable->AddConstProperty("SLOWTIMECONSTANT", 1590 * ns,true);
+
+    double rayleigh[N_DATA] = {100*cm,100*cm};
+    lArPropertiesTable->AddProperty("RAYLEIGH", photonEnergies, rayleigh, N_DATA);
 
     auto glass = G4NistManager::Instance()->FindOrBuildMaterial("G4_GLASS_PLATE");
     auto glassPropertiesTable = new G4MaterialPropertiesTable();
