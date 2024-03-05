@@ -6,10 +6,11 @@
 
 /gps/particle opticalphoton
 /gps/pos/type Point
-/gps/pos/centre 0 0 520 cm 
+#/gps/pos/centre 0 0 513 cm 
 /gps/ang/type iso
 /gps/ang/mintheta 0 deg
-/gps/polarization 0 0 1
+/gps/ene/mono 9.69 eV
+/gps/pos/centre 0 0 0 cm 
 #/gps/ene/type Pow
 #/gps/ene/min 8. keV
 #/gps/ene/max 10. keV

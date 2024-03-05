@@ -30,12 +30,11 @@ void histograma() {
 
     // Create a ROOT histogram
     //TH1F *histogram = new TH1F("histogram", "Number of photons arriving at the detector;Time (ns);", numBins, minValue-0.01, maxValue);
-    TH1F *histogram = new TH1F("histogram", "Number of photons arriving at the detector;Time (ns);", 250, 3.5, 25);
+    TH1F *histogram = new TH1F("histogram", "Number of photons/ns;Time (ns);", 251, 0, 25);
 
     // Reopen the file and fill the histogram
     inputFile.open("output.dat");
     while (inputFile >> value) {
-        value=value*10;
         histogram->Fill(value);
     }
 
@@ -44,6 +43,7 @@ void histograma() {
 
     // Create a ROOT canvas and draw the histogram
     TCanvas *canvas = new TCanvas("canvas", "Canvas Title", 800, 600);
+    canvas->SetLogy();
     histogram->Draw();
     canvas->Update();
 

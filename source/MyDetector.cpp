@@ -24,7 +24,8 @@ using namespace CLHEP;
 G4VPhysicalVolume* MyDetector::Construct(){
 
     const int N_DATA = 2;
-    double photonEnergies[N_DATA] = { 9*eV, 10*eV };
+    double photonEnergies[N_DATA] = { 9.68*eV, 9.69*eV };
+    //double photonEnergies[N_DATA] = { 9*eV, 10*eV };
 
 
 	// Liquid Argon
@@ -32,7 +33,8 @@ G4VPhysicalVolume* MyDetector::Construct(){
     auto lArPropertiesTable = new G4MaterialPropertiesTable();
 	lAr->SetMaterialPropertiesTable(lArPropertiesTable);
     
-    double lArRIndex[N_DATA] = { 1.32, 1.32 };
+    //double lArRIndex[N_DATA] = { 1.32, 1.32 };
+    double lArRIndex[N_DATA] = { 1.38, 1.38 };
     lArPropertiesTable->AddProperty("RINDEX", photonEnergies, lArRIndex, N_DATA);
     double lArAbsLength[N_DATA] = { 2000*cm, 2000*cm };
     lArPropertiesTable->AddProperty("ABSLENGTH", photonEnergies, lArAbsLength, N_DATA);
